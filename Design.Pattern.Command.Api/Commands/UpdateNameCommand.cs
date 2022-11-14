@@ -6,9 +6,18 @@ public class UpdateNameCommand : ICommand<ResponseState>
     public string Name { get; set; }
     public void Execute()
     {
-        var user = new User();
-        user.Id = Id;
-        user.Name = Name;
+        try
+        {
+            var user = new User();
+            user.Id = Id;
+            user.Name = Name;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            
+        }
+       
     }
 }
 

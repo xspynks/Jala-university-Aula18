@@ -1,5 +1,4 @@
 using Design.Pattern.Command.Api.Commands;
-using Design.Pattern.Command.Api.Receivers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Design.Pattern.Command.Api.Controllers;
@@ -7,17 +6,33 @@ namespace Design.Pattern.Command.Api.Controllers;
 [Route("[controller]/[action]")]
 public class CommandController : ControllerBase
 {
-    private readonly UserHandler _receiver;
-    public CommandController(UserHandler receiver)
+    private readonly IMediator _mediator;
+    public CommandController(IMediator mediator)
     {
-        _receiver = receiver;
+        _mediator = mediator;
     }
     
-    [HttpPost]
+    [HttpPost("UpdateUserName")]
     public IActionResult UpdateUserName(string name)
     {
-       var resultState = _receiver.Handle(new UpdateNameCommand(){Name = name});
-       return StatusCode(resultState.StatusCode, resultState.Message);
+        try
+        {
+            var resultState = _mediator.Send(new UpdateNameCommand(){Name = name, Id = 1});
+            return StatusCode(resultState.StatusCode, resultState.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Ok();
+        }
+     
+    }
+
+    [HttpPost("UndoChange")]
+    public IActionResult UndoChange(UndoUserAction userAction)
+    {
+        _mediator.Send(userAction);
+        return Ok();
     }
 
 }

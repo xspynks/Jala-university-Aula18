@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Design.Pattern.Command.Api\Design.Pattern.Command.Api.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    </ItemGroup>
+
 </Project>

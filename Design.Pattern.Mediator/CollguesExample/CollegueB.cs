@@ -1,9 +1,7 @@
+using Design.Pattern.Command.Api.Commands;
+
 namespace Design.Pattern.Mediator;
 
-public class CollegueB : Collegue
+public class CollegueB : ICommand<string>
 {
-    public override void HandleNotification(string message)
-    {
-        Console.WriteLine($"Object B Received {message}");
-    }
 }

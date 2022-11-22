@@ -27,6 +27,22 @@ public class CommandController : ControllerBase
         }
      
     }
+    
+    [HttpPost("UpdateRole")]
+    public IActionResult UpdateRole(string role)
+    {
+        try
+        {
+            var resultState = _mediator.Send(new UpdateRoleCommand(){Role = role, Id = 2});
+            return StatusCode(resultState.StatusCode, resultState.Message);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Ok();
+        }
+     
+    }
 
     [HttpPost("UndoChange")]
     public IActionResult UndoChange(UndoUserAction userAction)

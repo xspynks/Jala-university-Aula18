@@ -15,4 +15,11 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="ChatRoomExample\Commands.cs" />
+      <Compile Remove="ChatRoomExample\TeamChatRoom.cs" />
+      <Compile Remove="ChatRoomExample\ChatRoom.cs" />
+      <Compile Remove="ChatRoomExample\Commands\ICommand.cs" />
+    </ItemGroup>
+
 </Project>
